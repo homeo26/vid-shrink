@@ -48,6 +48,50 @@ exactly as it was.
 Files that are already efficient (at or below the bitrate cap) are **skipped**,
 so running the app twice never double-compresses anything.
 
+## How it decides what's already optimized
+
+The app keeps **no state at all** — no database, no settings file, no marker
+files. It re-derives the verdict from each video every time it looks at one:
+
+1. Read the resolution and the bitrate. The bitrate is the value declared in the
+   video track when present, otherwise file size × 8 ÷ duration.
+2. Look up the bitrate cap for that resolution:
+
+   | Resolution | Cap |
+   | --- | --- |
+   | 4K and above | 22 Mbps |
+   | 1440p | 14 Mbps |
+   | 1080p | 8 Mbps |
+   | 720p | 4.5 Mbps |
+   | below 720p | 2.5 Mbps |
+
+3. If the bitrate is at or below **cap × 1.3**, skip the file.
+
+So "already optimized" means *its bitrate is already low enough that
+re-encoding would not meaningfully help*. Compression targets the cap itself, so
+a file this app produced lands well inside the skip window and is ignored on
+every later run. A 1080p video, for example, is skipped below 10.4 Mbps and
+compressed toward 8 Mbps.
+
+**This survives uninstalling the app.** Delete it, reinstall it, clear its data,
+move to a new phone — the answer is recomputed from the file, so nothing is
+forgotten. It also keeps working when videos are renamed, moved between folders,
+or were compressed by some other tool. A database keyed on file paths would go
+stale in all of those cases and re-compress files it shouldn't.
+
+Two things this deliberately does *not* claim:
+
+- It is a judgement about bitrate, not a record of "I compressed this file". A
+  video that was always low-bitrate — a messaging-app forward, a downloaded
+  film — is reported as already optimized even though the app never touched it.
+  That is the useful answer (there is nothing to gain by re-encoding it), but it
+  is not the same statement.
+- The 30% margin exists to absorb encoder overshoot. If a hardware encoder
+  overshot its target by more than that, a later run could pick the file up
+  again. The output is still verified before replacing anything, so the worst
+  case is a wasted re-encode and a little extra quality loss, not a damaged
+  file.
+
 ## Features
 
 - Scan by folder (presets for Camera, DCIM, Movies, Download, Pictures,
