@@ -9,10 +9,10 @@ Studio, no third-party libraries. The whole APK is about **66 KB**.
 
 ## Screenshots
 
-| Set it up | Scan preview | While it runs |
-| --- | --- | --- |
-| ![Main screen](docs/screenshot-main.png) | ![Scan results](docs/screenshot-scan.png) | ![Compressing](docs/screenshot-progress.png) |
-| Choose folders, a size threshold and an optional date range | See what would actually be compressed versus what is already optimized, with each file's size and bitrate | Per-file and overall progress, live counters, and a stop button |
+| Set up | Scan preview | Running |
+| :---: | :---: | :---: |
+| <img src="docs/screenshot-main.png" width="250" alt="Main screen"> | <img src="docs/screenshot-scan.png" width="250" alt="Scan results"> | <img src="docs/screenshot-progress.png" width="250" alt="Compressing"> |
+| Folders, size threshold, date range | Already optimized vs. compressible, with bitrates | Per-file and overall progress, live counters |
 
 ## Why
 
