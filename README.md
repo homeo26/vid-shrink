@@ -1,8 +1,12 @@
 # VidShrink
 
 Shrink large videos **in place** on Android, using the phone's own hardware HEVC
-encoder. No cloud, no account, no internet permission — the app cannot phone
-home because it never asks for network access.
+encoder. Everything runs on the device: no cloud, no account, no uploads.
+
+The app does not declare the `INTERNET` permission, so Android blocks it from
+opening any network connection at all — it is not a promise, it is enforced by
+the operating system. You can check for yourself in
+[AndroidManifest.xml](AndroidManifest.xml): the permission simply isn't there.
 
 Built with the Android SDK command-line tools only: no Gradle, no Android
 Studio, no third-party libraries. The whole APK is about **66 KB**.
