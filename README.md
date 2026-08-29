@@ -5,7 +5,14 @@ encoder. No cloud, no account, no internet permission — the app cannot phone
 home because it never asks for network access.
 
 Built with the Android SDK command-line tools only: no Gradle, no Android
-Studio, no third-party libraries. The whole APK is about **62 KB**.
+Studio, no third-party libraries. The whole APK is about **66 KB**.
+
+## Screenshots
+
+| Set it up | Scan preview | While it runs |
+| --- | --- | --- |
+| ![Main screen](docs/screenshot-main.png) | ![Scan results](docs/screenshot-scan.png) | ![Compressing](docs/screenshot-progress.png) |
+| Choose folders, a size threshold and an optional date range | See what would actually be compressed versus what is already optimized, with each file's size and bitrate | Per-file and overall progress, live counters, and a stop button |
 
 ## Why
 
