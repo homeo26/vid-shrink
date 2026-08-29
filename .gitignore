@@ -1,0 +1,9 @@
+# build output
+build/
+
+# signing keys — never commit these
+*.keystore
+*.jks
+
+# OS noise
+.DS_Store
